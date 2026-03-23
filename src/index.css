@@ -1,0 +1,59 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg: #f9f7f4;
+  --surface: #ffffff;
+  --border: #e8e4de;
+  --text: #1a1814;
+  --text-muted: #8a8278;
+  --accent: #2a2420;
+  --accent-light: #f0ede8;
+  --green: #3a7d5a;
+  --green-light: #eef6f1;
+  --red: #b84040;
+  --red-light: #fdf0f0;
+  --yellow: #c4882a;
+  --yellow-light: #fdf5e8;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 2px 16px rgba(0,0,0,0.07);
+  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', serif;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+button {
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  transition: all 0.18s ease;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

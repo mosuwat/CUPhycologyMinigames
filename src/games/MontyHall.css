@@ -1,0 +1,247 @@
+.mh-container {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1rem 3rem;
+}
+
+.mh-header {
+  margin-bottom: 2rem;
+}
+
+.mh-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.mh-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 480px;
+}
+
+.mh-instruction {
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.1rem;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.mh-doors {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.mh-door:disabled {
+  opacity: 1 !important;
+}
+
+.mh-door {
+  position: relative;
+  width: 140px;
+  height: 200px;
+  background: none;
+  border: none;
+  padding: 0;
+  perspective: 600px;
+  cursor: default;
+}
+
+.mh-door-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mh-door.open .mh-door-inner {
+  transform: rotateY(180deg);
+}
+
+.mh-door.clickable {
+  cursor: pointer;
+}
+
+.mh-door.clickable:hover .mh-door-front {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.mh-door-front,
+.mh-door-back {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+.mh-door-front {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mh-door-back {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transform: rotateY(180deg);
+}
+
+.mh-door.selected .mh-door-inner .mh-door-front {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.mh-door.prize .mh-door-back {
+  border-color: var(--yellow);
+  background: var(--yellow-light);
+}
+
+.mh-door-num {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.5rem;
+  color: var(--text-muted);
+}
+
+.mh-icon {
+  font-size: 2.8rem;
+}
+
+.mh-selected-badge {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+.mh-result {
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mh-result.won {
+  background: var(--green-light);
+  border: 1px solid #c2ddd0;
+}
+
+.mh-result.lost {
+  background: var(--accent-light);
+  border: 1px solid var(--border);
+}
+
+.mh-result-text {
+  font-size: 0.95rem;
+}
+
+.mh-btn {
+  background: var(--accent);
+  color: #fff;
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.mh-btn:hover {
+  opacity: 0.85;
+}
+
+.mh-stats {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.mh-stat {
+  flex: 1;
+  min-width: 100px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.mh-stat-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.mh-stat-val {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.mh-stat-val.green {
+  color: var(--green);
+}
+
+@media (max-width: 500px) {
+  .mh-doors {
+    gap: 0.75rem;
+  }
+  .mh-door:disabled {
+  opacity: 1 !important;
+}
+
+.mh-door {
+    width: 100px;
+    height: 160px;
+  }
+  .mh-door-num {
+    font-size: 2rem;
+  }
+}
+
+.mh-door:disabled {
+  opacity: 1 !important;
+  cursor: default;
+}
+
+.mh-winrate {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.mh-winrate strong {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.4rem;
+}
+
+.mh-winrate-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

@@ -1,0 +1,113 @@
+.app {
+  min-height: 100vh;
+}
+
+/* Nav bar (in-game) */
+.app-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-back {
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s, background 0.15s;
+}
+
+.nav-back:hover {
+  color: var(--text);
+  background: var(--accent-light);
+}
+
+.nav-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+}
+
+/* Home */
+.app-header {
+  padding: 3.5rem 1.5rem 2rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.app-header h1 {
+  font-size: 3rem;
+  margin-bottom: 0.4rem;
+}
+
+.app-tagline {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1.5rem 3rem;
+}
+
+/* Game card */
+.game-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  transition: border-color 0.18s, box-shadow 0.18s, transform 0.18s;
+}
+
+.game-card:hover {
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.card-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.game-card h3 {
+  font-size: 1.5rem;
+}
+
+.card-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.card-play {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--accent);
+}

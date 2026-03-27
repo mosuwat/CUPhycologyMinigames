@@ -1,7 +1,22 @@
 import React, { useState, useRef } from 'react'
 import './MontyHall.css'
+import YellowDoor from '../assets/doors/YellowDoor.png'
+import YellowDoorOpen from '../assets/doors/YellowDoorOpen.png'
+import RedDoor from '../assets/doors/RedDoor.png'
+import RedDoorOpen from '../assets/doors/RedDoorOpen.png'
+import BlueDoor from '../assets/doors/BlueDoor.png'
+import BlueDoorOpen from '../assets/doors/BlueDoorOpen.png'
+import DeadGoat from '../assets/doors/DeadGoat.png'
+import LaughGoat from '../assets/doors/LaughGoat.png'
+import GiftBox from '../assets/doors/GiftBox.png'
 
 const TOTAL_DOORS = 3
+
+const DOOR_IMGS = [
+  { closed: YellowDoor, open: YellowDoorOpen },
+  { closed: RedDoor,    open: RedDoorOpen    },
+  { closed: BlueDoor,   open: BlueDoorOpen   },
+]
 
 function getInitialDoors() {
   const prizeDoor = Math.floor(Math.random() * TOTAL_DOORS)
@@ -10,6 +25,7 @@ function getInitialDoors() {
     hasPrize: i === prizeDoor,
     isOpen: false,
     isSelected: false,
+    openedByHost: false,
   }))
 }
 
@@ -37,7 +53,9 @@ export default function MontyHall() {
           let candidates = prev.filter(d => d.id !== id && d.id !== prizeId)
           if (candidates.length === 0) candidates = prev.filter(d => d.id !== id)
           const toOpen = candidates[Math.floor(Math.random() * candidates.length)]
-          return prev.map(d => d.id === toOpen.id ? { ...d, isOpen: true } : d)
+          return prev.map(d =>
+            d.id === toOpen.id ? { ...d, isOpen: true, openedByHost: true } : d
+          )
         })
         setStage('switch_or_stay')
       }, 600)
@@ -96,36 +114,59 @@ export default function MontyHall() {
       <div className="mh-instruction">{instructions[stage]}</div>
 
       <div className="mh-doors">
-        {doors.map(door => (
-          <button
-            key={door.id}
-            className={[
-              'mh-door',
-              door.isOpen ? 'open' : '',
-              door.isSelected ? 'selected' : '',
-              stage === 'result' && door.hasPrize ? 'prize' : '',
-              stage === 'pick' ? 'clickable' : '',
-              stage === 'switch_or_stay' && !door.isOpen ? 'clickable' : '',
-            ].filter(Boolean).join(' ')}
-            onClick={() => handleDoorClick(door.id)}
-            disabled={door.isOpen || stage === 'result'}
-          >
-            <div className="mh-door-inner">
-              <div className="mh-door-front">
-                <span className="mh-door-num">{door.id + 1}</span>
+        {doors.map(door => {
+          const imgs = DOOR_IMGS[door.id]
+          const isClickable =
+            stage === 'pick' ||
+            (stage === 'switch_or_stay' && !door.isOpen)
+
+          // Determine what to show inside the open door
+          let revealContent = null
+          if (door.isOpen) {
+            if (door.hasPrize) {
+              revealContent = <img src={GiftBox} className="mh-goat-img" alt="prize" />
+            } else {
+              // Player's chosen door at result → dazed goat; host/web → happy goat
+              const playerReveal = stage === 'result' && door.isSelected
+              revealContent = (
+                <img
+                  src={playerReveal ? DeadGoat : LaughGoat}
+                  className="mh-goat-img"
+                  alt="goat"
+                />
+              )
+            }
+          }
+
+          return (
+            <button
+              key={door.id}
+              className={[
+                'mh-door',
+                door.isOpen ? 'open' : '',
+                door.isSelected && stage === 'switch_or_stay' ? 'selected' : '',
+                stage === 'result' && door.hasPrize ? 'prize' : '',
+                isClickable ? 'clickable' : '',
+              ].filter(Boolean).join(' ')}
+              onClick={() => handleDoorClick(door.id)}
+              disabled={door.isOpen || stage === 'result'}
+            >
+              <div className="mh-door-wrap">
+                <img
+                  src={door.isOpen ? imgs.open : imgs.closed}
+                  className="mh-door-img"
+                  alt={`Door ${door.id + 1}`}
+                />
+                {revealContent && (
+                  <div className="mh-door-reveal">{revealContent}</div>
+                )}
               </div>
-              <div className="mh-door-back">
-                {door.hasPrize
-                  ? <span className="mh-icon">🏆</span>
-                  : <span className="mh-icon">🐐</span>
-                }
-              </div>
-            </div>
-            {door.isSelected && stage !== 'result' && (
-              <div className="mh-selected-badge">Your pick</div>
-            )}
-          </button>
-        ))}
+              {door.isSelected && stage === 'switch_or_stay' && (
+                <div className="mh-selected-badge">Your pick</div>
+              )}
+            </button>
+          )
+        })}
       </div>
 
       {stage === 'result' && (

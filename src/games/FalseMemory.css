@@ -288,6 +288,80 @@
   color: var(--text-muted);
 }
 
+/* Summary table */
+.fm-summary-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 1rem;
+  font-size: 0.88rem;
+}
+
+.fm-summary-thead,
+.fm-summary-trow {
+  display: grid;
+  grid-template-columns: 1fr 56px 80px;
+}
+
+.fm-summary-thead {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.fm-summary-thead span:not(:first-child),
+.fm-summary-trow span:not(:first-child) {
+  text-align: right;
+}
+
+.fm-summary-trow {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.fm-summary-trow:last-child {
+  border-bottom: none;
+}
+
+.fm-summary-trow--orig span:first-child  { color: var(--green); }
+.fm-summary-trow--unrel span:first-child { color: var(--text-muted); }
+.fm-summary-trow--rel span:first-child   { color: var(--red); }
+
+.fm-summary-note {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  line-height: 1.5;
+}
+
+.fm-charts {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.fm-chart {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.4rem 0.3rem;
+}
+
+.fm-chart-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.2rem;
+}
+
 /* Summary */
 .fm-summary-score {
   text-align: center;
@@ -351,4 +425,76 @@
   width: 90px;
   text-align: right;
   flex-shrink: 0;
+}
+
+/* Language select */
+.fm-lang-btns {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.fm-lang-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, transform 0.1s;
+}
+
+.fm-lang-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  transform: translateY(-2px);
+}
+
+.fm-lang-icon {
+  font-size: 2rem;
+}
+
+/* Intro actions */
+.fm-intro-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fm-btn-ghost {
+  background: none;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  padding: 0.5rem;
+  text-decoration: underline;
+  cursor: pointer;
+  border: none;
+  text-align: left;
+}
+
+.fm-btn-ghost:hover {
+  color: var(--text);
+}
+
+/* 3-column grid for Thai (12 words) */
+.fm-grid--cols3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* 4-column grid for English (16 words) — default */
+.fm-grid--cols4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Summary actions */
+.fm-summary-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
 }

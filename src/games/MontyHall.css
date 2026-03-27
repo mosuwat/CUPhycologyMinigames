@@ -43,82 +43,61 @@
 
 .mh-door {
   position: relative;
-  width: 140px;
-  height: 200px;
   background: none;
   border: none;
   padding: 0;
-  perspective: 600px;
   cursor: default;
-}
-
-.mh-door-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.mh-door.open .mh-door-inner {
-  transform: rotateY(180deg);
 }
 
 .mh-door.clickable {
   cursor: pointer;
 }
 
-.mh-door.clickable:hover .mh-door-front {
-  border-color: var(--accent);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+.mh-door.clickable:hover .mh-door-img {
+  filter: brightness(0.92);
 }
 
-.mh-door-front,
-.mh-door-back {
+.mh-door.selected .mh-door-img {
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+.mh-door.prize .mh-door-img {
+  filter: drop-shadow(0 0 8px var(--yellow));
+}
+
+.mh-door-wrap {
+  position: relative;
+  width: 120px;
+}
+
+.mh-door-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: filter 0.2s, opacity 0.35s ease;
+}
+
+.mh-door.open .mh-door-img {
+  opacity: 0.25;
+}
+
+.mh-door-reveal {
   position: absolute;
   inset: 0;
-  border-radius: var(--radius);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: border-color 0.18s, box-shadow 0.18s;
+  pointer-events: none;
 }
 
-.mh-door-front {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.mh-door-back {
-  background: var(--surface);
-  border: 2px solid var(--border);
-  box-shadow: var(--shadow-sm);
-  transform: rotateY(180deg);
-}
-
-.mh-door.selected .mh-door-inner .mh-door-front {
-  border-color: var(--accent);
-  background: var(--accent-light);
-}
-
-.mh-door.prize .mh-door-back {
-  border-color: var(--yellow);
-  background: var(--yellow-light);
-}
-
-.mh-door-num {
-  font-family: 'DM Serif Display', serif;
-  font-size: 2.5rem;
-  color: var(--text-muted);
+.mh-goat-img {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
 }
 
 .mh-icon {
-  font-size: 2.8rem;
+  font-size: 3.5rem;
 }
 
 .mh-selected-badge {
@@ -208,18 +187,10 @@
 
 @media (max-width: 500px) {
   .mh-doors {
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
-  .mh-door:disabled {
-  opacity: 1 !important;
-}
-
-.mh-door {
-    width: 100px;
-    height: 160px;
-  }
-  .mh-door-num {
-    font-size: 2rem;
+  .mh-door-wrap {
+    width: 90px;
   }
 }
 
